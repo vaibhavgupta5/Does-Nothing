@@ -1,0 +1,69 @@
+@import "tailwindcss";
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 0, 0, 0;
+  --background-end-rgb: 0, 0, 0;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: black;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-family: 'Times New Roman', serif; /* Or user requested font? Standard serif/sans fits "nothing" */
+}
+
+/* Animations in globals for simplicity */
+.page-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+  transition: background-color 4s ease-out;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.page-container.day {
+  background-color: #fff;
+}
+
+.sun {
+  position: absolute;
+  width: 120px;
+  height: 120px;
+  background: #ffcc00;
+  border-radius: 50%;
+  box-shadow: 0 0 50px #ffcc00;
+  top: 110%; /* Start below screen */
+  left: 50%;
+  transform: translateX(-50%);
+  transition: top 4s cubic-bezier(0.5, 0, 0.5, 1);
+  z-index: 1;
+}
+
+.page-container.day .sun {
+  top: 15%;
+}
+
+.text-content {
+  z-index: 2;
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  opacity: 0;
+  color: #fff; /* Starts white on dark */
+  transition: opacity 2s ease-in 2s, color 4s ease-out; /* Fade in delayed, color syncs with bg */
+  max-width: 600px;
+  padding: 20px;
+}
+
+.page-container.day .text-content {
+  opacity: 1;
+  color: #000; /* Becomes black on white */
+}
