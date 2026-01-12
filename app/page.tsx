@@ -25,8 +25,13 @@ export default function Home() {
   return (
     <main className={`page-container ${isDay ? "day" : ""}`}>
       <div className="sun" />
-      <h1 className="text-content">
-        this website does nothing and sends to google.com
+      <div className="clouds">
+        <div className="cloud c1" />
+        <div className="cloud c2" />
+        <div className="cloud c3" />
+      </div>
+      <h1 className="text-content uppercase fixed bottom-10">
+        this website does nothing!
       </h1>
     </main>
   );
