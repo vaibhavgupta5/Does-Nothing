@@ -14,7 +14,7 @@ export default function Home() {
     // Redirect to google.com after animation and reading time
     const redirectTimeout = setTimeout(() => {
       window.location.href = "https://www.google.com";
-    }, 6000); // 0.5s start + 4s rise + 1.5s read
+    }, 9000); 
 
     return () => {
       clearTimeout(animTimeout);
