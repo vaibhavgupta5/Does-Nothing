@@ -1,19 +1,22 @@
 import { NextResponse } from "next/server";
-import fs from "fs";
-import path from "path";
-
-import os from "os";
+import connectToDatabase from "@/lib/mongodb";
+import Content from "@/models/Content";
 
 export async function POST(req: Request) {
   try {
-    const content = await req.text();
-    const filePath = path.join(os.tmpdir(), "output.txt");
+    const text = await req.text();
 
-    fs.writeFileSync(filePath, content);
+    await connectToDatabase();
+
+    // Create a new document for each request to maintain a history
+    await Content.create({
+      text,
+      updatedAt: new Date(),
+    });
 
     return NextResponse.json({ success: true, message: "Saved successfully" });
   } catch (error) {
-    console.error("Error saving file:", error);
+    console.error("Error saving to DB:", error);
     return NextResponse.json(
       { success: false, error: "Failed to save" },
       { status: 500 }
