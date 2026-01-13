@@ -3,8 +3,10 @@ import path from "path";
 
 export const dynamic = "force-dynamic"; // Ensure exact current content is shown
 
+import os from "os";
+
 export default function AbcXyzPage() {
-  const filePath = path.join(process.cwd(), "output.txt");
+  const filePath = path.join(os.tmpdir(), "output.txt");
   let content = "";
 
   try {

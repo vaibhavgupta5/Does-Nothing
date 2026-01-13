@@ -2,10 +2,12 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
+import os from "os";
+
 export async function POST(req: Request) {
   try {
     const content = await req.text();
-    const filePath = path.join(process.cwd(), "output.txt");
+    const filePath = path.join(os.tmpdir(), "output.txt");
 
     fs.writeFileSync(filePath, content);
 
